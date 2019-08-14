@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,15 +9,14 @@ import java.util.StringTokenizer;
 
 public class AnalisaArquivo {
 
-    private HashMap<String, ArrayList<Integer>> identificadores;
+    private static HashMap<String, ArrayList<Integer>> identificadores = new HashMap<>();
 
-    public static boolean lerArquivo(String nomeArq) {
+    public static HashMap<String, ArrayList<Integer>> lerArquivo(String arquivo) throws IOException{
 
         int countLinha = 0;
-        String nome = nomeArq;
 
         try {
-            FileReader arq = new FileReader(nome);
+            FileReader arq = new FileReader(arquivo);
             BufferedReader lerArq = new BufferedReader(arq);
 
             String linha = lerArq.readLine();
@@ -30,10 +30,10 @@ public class AnalisaArquivo {
 
             arq.close();
         } catch (IOException e) {
-            System.err.printf("Erro na abertura do arquivo: %s.\n",
-                    e.getMessage());
+            System.out.println("ERRO: arquivo de entrada inexistente.");
+            throw e;
         }
-        return true;
+        return identificadores;
     }
 
     private static void analisaLinha(String linha, int numLinha){
@@ -52,7 +52,19 @@ public class AnalisaArquivo {
 
     private static boolean adicionaIndentificador(String token, int numLinha){
 
+        if (checkMap(token)) {
+            identificadores.get(token).add(numLinha);
+        } else {
+            ArrayList<Integer> linhas = new ArrayList<>();
+            linhas.add(numLinha);
+            identificadores.put(token, linhas);
+        }
+
         return true;
+    }
+
+    private static boolean checkMap(String ident) {
+        return identificadores.containsKey(ident);
     }
 
     private static String removerSimbolos(String linha){
