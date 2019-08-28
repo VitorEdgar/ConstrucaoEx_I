@@ -9,13 +9,13 @@ import java.util.StringTokenizer;
 
 public class AnalisaArquivo {
 
-    public static HashMap<String, ArrayList<Integer>> identificadores = new HashMap<>();
+    private static HashMap<String, ArrayList<Integer>> identificadores = new HashMap<>();
 
     /**
      * Le o arquivo cujo nome foi recebido e retorna o Map estatico da classe contendo os identificadores e as linhas
      * onde aparecem.
      */
-    public static void lerArquivo(String nomeArquivo) throws IOException{
+    public static HashMap<String, ArrayList<Integer>> lerArquivo(String nomeArquivo) throws IOException{
 
         int countLinha = 0;
 
@@ -36,6 +36,7 @@ public class AnalisaArquivo {
             System.out.println("ERRO: arquivo de entrada inexistente.");
             throw e;
         }
+        return identificadores;
     }
 
     /**
@@ -74,7 +75,7 @@ public class AnalisaArquivo {
     /**
      * Remove os simbolos indesejados da linha, trocando-os por espaços.
      */
-    public static String removerSimbolos(String linha){
+    private static String removerSimbolos(String linha){
         String aux;
         aux = linha.replaceAll("[^a-zA-Z0-9_]", " ");
         return aux;
