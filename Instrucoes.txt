@@ -1,0 +1,7 @@
+Este programa recebe um arquivo e gera outro arquivo contendo todas palavras do arquivo de entrada e as linhas em que elas aparecem.
+
+Execução:
+
+Executar o programa utilizando a classe Main.
+Informar o nome do arquivo de entrada com extensão (Ex: arquivo.txt). O arquivo deve estar na mesma pasta da classe main (ou na pasta do projeto, caso seja executado em uma IDE).
+Será gerado um arquivo chamado nome-do-arquivo-xref.txt. (Ex: arquivo-xref.txt).
